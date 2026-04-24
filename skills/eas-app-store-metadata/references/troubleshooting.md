@@ -44,6 +44,21 @@ What to do:
 - update only the untracked local config or environment variable that references that key
 - if the key was ever committed or shared, rotate it instead of assuming deletion is enough
 
+## ASC_API_KEY_PATH Is Unset Or Not Resolved
+
+Common symptoms:
+
+- tracked `eas.json` uses `"ascApiKeyPath": "$ASC_API_KEY_PATH"`
+- EAS falls back to prompting for the API key path or warns that the referenced file does not exist
+- the command works in one shell but fails in another
+
+What to do:
+
+- export `ASC_API_KEY_PATH` from untracked local shell config, direnv, or another local-only runner setup
+- confirm the variable points to the outside-repo `.p8` file that should be used on this machine
+- if the project also env-backs `ascApiKeyIssuerId` or `ascApiKeyId`, confirm those variables are set too
+- avoid fixing the problem by committing the resolved absolute path into `eas.json`
+
 ## App Does Not Exist On App Store Connect Yet
 
 Common symptoms:

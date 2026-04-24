@@ -13,6 +13,8 @@ Before `eas metadata:push`, verify all of these:
 - the local diff matches the requested scope
 - no `.p8` App Store Connect private key lives under the repository tree
 - any `ascApiKeyPath` or equivalent secret reference resolves outside the repository
+- if tracked `eas.json` exists, prefer `"ascApiKeyPath": "$ASC_API_KEY_PATH"` over a machine-local absolute path
+- any required local environment variables for env-backed submit fields are set before invoking EAS
 - credentials files and real user-private key paths are not being committed
 
 ## Version Alignment

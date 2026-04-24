@@ -51,6 +51,8 @@ credentials:
   # Recommended best default on macOS: keep it in a user-private Application
   # Support directory outside the checkout, then reference it from untracked
   # local config or environment.
+  # In tracked eas.json, prefer the supported EAS submit pattern:
+  # "ascApiKeyPath": "$ASC_API_KEY_PATH"
   # Example local-only environment variable:
   # export ASC_API_KEY_PATH="$HOME/Library/Application Support/eas/credentials/<apple-team-id>/AuthKey_<key-id>.p8"
   eas_json_path: eas.json
@@ -60,6 +62,7 @@ credentials:
   api_key_path_style: user-private-macos-application-support-directory
   local_env_var_name: ASC_API_KEY_PATH
   local_path_example: "$HOME/Library/Application Support/eas/credentials/<apple-team-id>/AuthKey_<key-id>.p8"
+  tracked_eas_json_path_reference: "$ASC_API_KEY_PATH"
 
 commands:
   pull: eas metadata:pull --profile production

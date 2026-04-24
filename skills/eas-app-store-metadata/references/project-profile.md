@@ -103,6 +103,24 @@ Use that variable only from untracked local shell config, direnv, or another loc
 
 If a project generates local submit config from templates, resolve `ASC_API_KEY_PATH` into the final local-only config at generation time rather than committing the resolved absolute path.
 
+#### Tracked eas.json Pattern
+
+When the project keeps `eas.json` under version control, prefer an environment-backed submit profile entry such as:
+
+```json
+{
+	"submit": {
+		"production": {
+			"ios": {
+				"ascApiKeyPath": "$ASC_API_KEY_PATH"
+			}
+		}
+	}
+}
+```
+
+EAS CLI evaluates `ascApiKeyPath` from environment variables when resolving iOS submit profiles. It can do the same for `ascApiKeyIssuerId` and `ascApiKeyId` if the project chooses to keep those out of tracked config too.
+
 ## Behavior Without A Profile
 
 If no profile exists:

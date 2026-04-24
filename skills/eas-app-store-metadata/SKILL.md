@@ -27,7 +27,10 @@ Manage and version App Store Connect metadata with EAS CLI and a repository-loca
 5. Keep the metadata workflow separate from binary build, binary upload, and final review submission unless the user explicitly asks to automate those too.
 6. Do not commit `.p8` API key files, real private-key paths, or other secret-bearing local credential variants. A shared `eas.json` is acceptable only when it stays secret-free.
 7. Do not store the App Store Connect API private key anywhere under the project root, even in a gitignored `credentials/` folder. Keep it outside the repository in a user-private local directory.
-8. Keep the release target version explicit and aligned with the native app version source.
+8. In tracked `eas.json`, prefer `"ascApiKeyPath": "$ASC_API_KEY_PATH"` over a machine-specific absolute path. EAS CLI supports environment-variable evaluation for this iOS submit field.
+9. After the `.p8` file is placed in its outside-repo location, ask whether the user wants `ASC_API_KEY_PATH` persisted in local shell config, direnv, or another local-only environment setup so they do not need to export it manually every time.
+10. Keep the release target version explicit and aligned with the native app version source.
+11. Before ending, tell the user the concrete EAS commands they can use later for ASC sync, metadata changes, and version-preparation steps, then ask whether those steps should be written into README, development docs, or another user-specified location.
 
 ## First-Run Requirement
 
@@ -53,6 +56,8 @@ Treat the App Store Connect `.p8` private key as workstation-local secret materi
 
 - Never keep the `.p8` file under the repository tree, even if that folder is gitignored.
 - Recommended best default on macOS: a per-user private Application Support directory outside the checkout, then reference that path from untracked local config or an environment variable.
+- In tracked `eas.json`, prefer the supported EAS submit pattern `"ascApiKeyPath": "$ASC_API_KEY_PATH"` instead of a resolved absolute path.
+- EAS CLI also supports environment-variable evaluation for `ascApiKeyIssuerId` and `ascApiKeyId` if a project chooses to source those locally too.
 - Commit only secret-free templates and policy notes. Do not normalize in-repo secret storage by shipping examples such as `./credentials/AuthKey_...p8`.
 
 ## Project Profile
@@ -80,4 +85,7 @@ If no profile exists, use the conservative defaults in [project profile referenc
 - requested metadata fields, locales, and screenshot paths are updated in the local source of truth
 - lint and diff review happen before any push
 - release handoff steps for ASC draft creation, binary upload, build attachment, and review submission are explicit
+- after the `.p8` file is placed, the user is asked whether `ASC_API_KEY_PATH` should be persisted in local-only environment setup
+- the user receives a concrete future-use command handoff for sync, metadata edits, and version-preparation steps
+- the user is asked whether those steps should be written into README, development docs, or another specified location
 - no secrets, no in-repo `.p8` storage pattern, and no project-private values are committed into shared templates
