@@ -1,0 +1,29 @@
+{
+  "configVersion": 0,
+  "apple": {
+    "version": "1.0.0",
+    "release": {
+      "automaticRelease": false
+    },
+    "info": {
+      "en-US": {
+        "title": "Example App",
+        "subtitle": "Clear value proposition",
+        "description": "Describe the product, its primary workflows, and the audience it serves.",
+        "keywords": [
+          "example",
+          "productivity"
+        ],
+        "releaseNotes": "What is new in this version.",
+        "promoText": "Optional promotional copy for current campaigns.",
+        "supportUrl": "https://example.com/support",
+        "privacyPolicyUrl": "https://example.com/privacy",
+        "screenshots": {
+          "APP_IPHONE_67": [
+            "store/apple/screenshot/en-US/APP_IPHONE_67/01-home.png"
+          ]
+        }
+      }
+    }
+  }
+}

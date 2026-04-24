@@ -1,0 +1,18 @@
+{
+  "cli": {
+    "version": ">= 18.0.0"
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "ascAppId": "YOUR_ASC_APP_ID",
+        "appleTeamId": "YOUR_APPLE_TEAM_ID",
+        "ascApiKeyPath": "<outside-repo user-private directory>/AuthKey_XXXXXXXXXX.p8",
+        "ascApiKeyIssuerId": "YOUR_ISSUER_UUID",
+        "ascApiKeyId": "YOUR_KEY_ID",
+        "bundleIdentifier": "com.example.app",
+        "metadataPath": "./store.config.json"
+      }
+    }
+  }
+}
