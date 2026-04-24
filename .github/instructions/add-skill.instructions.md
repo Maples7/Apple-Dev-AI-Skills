@@ -1,5 +1,5 @@
 ---
-description: "Use when adding a new skill, scaffolding a skill folder under skills/, or updating the README skill catalog. Enforces the minimum structure for skills/<name>/SKILL.md, references/, assets/, and concise catalog entries."
+description: "Use when adding a new skill, scaffolding a skill folder under skills/, bootstrapping with npx skills init, or updating the README skill catalog. Enforces the minimum structure for skills/<name>/SKILL.md, references/, assets/, and concise catalog entries."
 applyTo:
   - README.md
   - skills/**/SKILL.md
@@ -12,6 +12,8 @@ applyTo:
 - Put each canonical skill under `skills/<skill-name>/`.
 - The folder name and the `name` field in `SKILL.md` must match exactly.
 - Use lowercase, hyphenated skill names.
+- When bootstrapping a new canonical skill, prefer starting with `npx skills init <skill-name>` so the generated `SKILL.md` begins from an `npx skills`-compatible template.
+- Treat the generated template as a starting point; trim or reorganize it to match this repository's minimum structure and publishable-doc requirements.
 
 - Minimum expected structure:
   - `skills/<skill-name>/SKILL.md`
