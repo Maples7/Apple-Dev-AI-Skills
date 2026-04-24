@@ -34,6 +34,8 @@ sample_data:
 raw_capture:
   script_path: scripts/generate_screenshots.py
   tool_preference: python
+  # Example only. Prefer an existing project convention when one exists,
+  # otherwise choose a path like this and let the user override it.
   output_root: app-store-captures/raw
   proof_devices:
     - iphone
@@ -54,6 +56,8 @@ final_export:
     - ipad
   require_opaque_output: true
   flatten_alpha: true
+  # Example only. Prefer an existing project convention when one exists,
+  # otherwise choose a path like this and let the user override it.
   output_root: app-store-export
 
 validation:

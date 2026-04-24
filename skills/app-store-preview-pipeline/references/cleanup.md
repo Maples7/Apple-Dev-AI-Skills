@@ -25,6 +25,12 @@ Ask before deleting:
 - the preview/export project when it is the reproducible source of truth
 - any prior output tree the user may still need for comparison
 
+## Git Ignore Boundary
+
+- If a generated path should stay local for reruns, review, or caching, do not rely on memory alone; tell the user it likely belongs in the project's `.gitignore`.
+- Typical candidates include validation preview folders, local web build caches, export temp directories, downloaded archives, or other generated folders that are reproducible and should not be committed.
+- If it is unclear whether a path is source material, a deliverable, or disposable local state, ask the user before editing `.gitignore`.
+
 ## End State
 
 After cleanup, the project should still make it obvious:

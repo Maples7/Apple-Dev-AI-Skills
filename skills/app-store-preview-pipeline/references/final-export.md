@@ -85,6 +85,9 @@ Before writing the final batch, confirm:
 - whether the automation has write permission there
 - whether the user wants the final output grouped by locale, device, or store upload slot
 - whether the user wants the smallest compliant set or broader iPhone and iPad coverage
+- whether the final export path should be committed or added to `.gitignore`
+
+The raw-capture destination should already have been confirmed earlier in the workflow. If it was not, pause and ask before proceeding with batch export so both the source captures and the final upload-ready images have an explicit home and an explicit commit-vs-ignore decision.
 
 ## Deliverable Boundary
 

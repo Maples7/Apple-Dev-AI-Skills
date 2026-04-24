@@ -28,6 +28,12 @@ Use [sample-data.md](./sample-data.md) for the contract details.
 
 ## 3. Gather The Requested Scope
 
+Before asking the user to choose paths, inspect the existing project layout.
+
+- If the project already has a clear screenshots, marketing, store-assets, or preview directory convention, propose raw-capture and final-export paths that fit that convention.
+- If the project has no clear convention, propose conservative defaults based on [project layout](./project-layout.md).
+- Do not force the recommendation. Let the user choose one of the proposed locations or provide fully custom paths.
+
 Before writing automation, explicitly ask the user:
 
 - which screens should be shown
@@ -36,7 +42,10 @@ Before writing automation, explicitly ask the user:
 - which device families matter
 - whether they want the smallest compliant set or the widest currently accepted iPhone and iPad coverage
 - whether light, dark, or both appearances are required
-- whether the final assets should live inside the project or in another destination
+- where raw captures should live
+- where final upload-ready App Store Connect screenshots should live
+- whether the raw-capture path should be committed or added to `.gitignore`
+- whether the final export path should be committed or added to `.gitignore`
 
 If the user wants broad store coverage, the agent should look up the current App Store Connect screenshot specifications at the time of the task instead of assuming an older size matrix is still correct.
 
@@ -47,6 +56,7 @@ Use [assets/capture-manifest.yaml](../assets/capture-manifest.yaml) as the start
 ## 4. Build Proof-First Capture Automation
 
 - Prefer the project's existing test or automation language when it already has simulator tooling.
+- Before generating proof images, confirm the raw-capture destination and whether that path is intended to be tracked or ignored.
 - Build a script that can boot or select the simulator, launch the app with sample-data and locale parameters, navigate to the requested screens, and save raw captures with stable file names.
 - Keep proof mode small: one locale, one or two devices, and only the highest-value screens.
 - Avoid generating the full locale and device matrix before the user approves the proof set.
@@ -72,6 +82,8 @@ Use [final-export.md](./final-export.md) for the export rules.
 ## 7. Confirm Destination And Batch Generate
 
 - Ask where the final exported images should be written.
+- If the project has multiple plausible homes for final exports, recommend the best fit and let the user either accept it or override it with a custom path.
+- Confirm whether the final export path should be committed or added to `.gitignore`.
 - Confirm write permissions and whether existing outputs may be overwritten.
 - Only after proof approval and destination confirmation should the automation generate the full matrix of locales, devices, and approved screens.
 
@@ -80,7 +92,24 @@ Use [final-export.md](./final-export.md) for the export rules.
 - Remove temporary outputs that are safe to recreate.
 - Preserve anything required for reproducibility unless the user explicitly asks for a full cleanup.
 - Leave the project with a clear boundary between source captures, final deliverables, and throwaway intermediates.
+- If some generated, cached, or review-only paths should stay local instead of being deleted, remind the user to add them to the project's `.gitignore`.
+- If it is not obvious whether a path should be committed, ignored, or deleted, ask the user before changing `.gitignore` or removing the files.
 
 The goal after cleanup is not merely a tidy folder tree. The goal is a pipeline that can be rerun with low friction when screenshots, seed data, copy, supported locales, or device coverage change later.
 
 Use [cleanup.md](./cleanup.md) for the cleanup checklist.
+
+## 9. Close With A Maintenance Handoff
+
+If the project is running this screenshot pipeline for the first time, do not stop at successful export.
+
+- Summarize the long-term rerun path in plain language.
+- Explicitly tell the user how the project should refresh or reseed deterministic sample data.
+- Explicitly tell the user how the project should rerun proof captures.
+- Explicitly tell the user how the project should approve and batch export final images.
+- Explicitly tell the user how the project should rerun validation.
+- Explicitly tell the user how the project should clean up disposable intermediates.
+- Point to the project-owned scripts, manifests, profile files, or commands that now own those steps.
+- Ask whether the rerun and maintenance workflow should be written into the project's README, contributing guide, internal developer docs, or another project-owned document.
+
+This closing handoff matters because a first successful run is also the point where the team either captures the process for future maintainers or loses it back into chat history.

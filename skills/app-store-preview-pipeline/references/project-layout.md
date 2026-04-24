@@ -4,6 +4,8 @@ Keep the screenshot pipeline organized so raw captures, review assets, and final
 
 ## Recommended Layout
 
+Treat this layout as a starting recommendation, not a mandatory folder tree.
+
 ```text
 app-store-assets/
 ├── app-store-preview-pipeline-profile.yaml
@@ -43,3 +45,9 @@ app-store-assets/
 ## When To Deviate
 
 Use the project's existing conventions when they are already clear and stable. The goal is reproducibility and reviewability, not enforcing one exact folder tree.
+
+When helping a user choose paths:
+
+- Prefer recommendations that fit the existing project structure over introducing a parallel folder scheme.
+- Offer one or more sensible directory options when the project has multiple plausible homes for screenshot assets.
+- Allow the user to provide fully custom raw-capture and final-export paths when the recommended layout does not fit their repo.
