@@ -1,5 +1,17 @@
 # Apple Dev AI Skills
 
+### `app-store-preview-pipeline`
+
+Build a public, proof-first App Store Connect screenshot pipeline with deterministic sample data, review checkpoints, broad device coverage guidance, and final opaque export rules.
+
+[Open skill folder](./skills/app-store-preview-pipeline)
+
+Install only this skill:
+
+```bash
+npx skills add Maples7/Apple-Dev-AI-Skills --skill app-store-preview-pipeline
+```
+
 Build better Apple apps, faster.
 
 A growing catalog of installable AI skills for Swift, SwiftUI, Xcode, testing, automation, and App Store delivery.
@@ -24,17 +36,6 @@ Install globally:
 npx skills add Maples7/Apple-Dev-AI-Skills -g
 ```
 
-The same CLI also accepts the full GitHub URL:
-
-```bash
-npx skills add https://github.com/Maples7/Apple-Dev-AI-Skills
-```
-
-If your client does not use `npx skills add`, copy the relevant skill folder into one of that client's supported skill locations.
-
-## Skills
-
-### `translate-xcstrings`
 
 Translate or normalize Xcode `.xcstrings` catalogs, including `Localizable.xcstrings`, `InfoPlist.xcstrings`, and `AppShortcuts.xcstrings`.
 
@@ -56,6 +57,18 @@ Install only this skill:
 
 ```bash
 npx skills add Maples7/Apple-Dev-AI-Skills --skill commit-message
+```
+
+### `eas-app-store-metadata`
+
+Manage and version App Store Connect listing data with EAS CLI, including store.config.json, release notes, screenshots, linting, and push-safe review.
+
+[Open skill folder](./skills/eas-app-store-metadata)
+
+Install only this skill:
+
+```bash
+npx skills add Maples7/Apple-Dev-AI-Skills --skill eas-app-store-metadata
 ```
 
 ## Compatibility

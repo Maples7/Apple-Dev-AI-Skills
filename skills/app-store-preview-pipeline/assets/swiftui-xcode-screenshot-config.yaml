@@ -1,0 +1,65 @@
+# Copy this file into your repository and adapt it to the app's native Apple screenshot pipeline.
+# It is meant to complement the broader app-store-preview-pipeline profile with
+# SwiftUI/Xcode-specific launch flags, seed naming, routes, and rerun commands.
+
+launch_options:
+  enable_flag: -UseScreenshotSampleData
+  seed_flag: -ScreenshotSeed
+  route_flag: -ScreenshotRoute
+  locale_flags:
+    languages: -AppleLanguages
+    locale: -AppleLocale
+
+build_safety:
+  default_compile_time_guard: DEBUG
+  allow_release_like_screenshot_builds: false
+  notes: >-
+    Keep screenshot-only container switching behind #if DEBUG or another
+    internal build flag by default. Do not let a public production build select
+    screenshot data containers solely from runtime launch arguments.
+
+environment:
+  SCREENSHOT_MODE: "1"
+
+bootstrap:
+  install_before_root_ui: true
+  storage_strategy: in-memory-or-resettable-store
+  reset_state_on_launch: true
+
+seed_names:
+  default:
+    purpose: General marketing baseline screens.
+    locales:
+      - en-US
+      - de-DE
+    routes:
+      - home
+      - dashboard
+  reports:
+    purpose: Analytics, reports, or trend-heavy screens.
+    locales:
+      - en-US
+      - de-DE
+    routes:
+      - reports-monthly
+      - reports-category
+
+routes:
+  home:
+    description: Launch into the primary overview screen.
+  dashboard:
+    description: Launch into the main dashboard or landing screen.
+  reports-monthly:
+    description: Launch directly into the monthly reports screen.
+
+suppress_during_screenshots:
+  - onboarding
+  - review-prompts
+  - permission-prompts
+  - background-sync-jitter
+  - transient-banners
+
+rerun_commands:
+  proof_capture: make screenshot-proof
+  batch_capture: make screenshot-batch
+  validate_export: python3 scripts/validate_exported_images.py --root app-store-export --require-opaque

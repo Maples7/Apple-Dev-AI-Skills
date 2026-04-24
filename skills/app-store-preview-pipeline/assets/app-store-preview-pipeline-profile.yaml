@@ -1,0 +1,74 @@
+# Copy this file into your repository as app-store-preview-pipeline-profile.yaml,
+# .ai/app-store-preview-pipeline-profile.yaml, or
+# .github/app-store-preview-pipeline-profile.yaml and customize it per project.
+
+bundle_id: com.example.app
+
+supported_locales:
+  - en-US
+  - de-DE
+
+proof_locale: en-US
+
+devices:
+  - id: iphone
+    simulator_name: iPhone 16 Pro
+    family: iphone
+  - id: ipad
+    simulator_name: iPad Pro 11-inch (M4)
+    family: ipad
+
+sample_data:
+  required: true
+  strategy: launch-arguments
+  launch_arguments:
+    - -UseScreenshotSampleData
+    - -ScreenshotSeed
+    - default
+  environment:
+    SCREENSHOT_MODE: "1"
+  notes: >-
+    Describe how screenshot-safe seed data is initialized and which prompts,
+    sync flows, or alerts should be disabled during capture.
+
+raw_capture:
+  script_path: scripts/generate_screenshots.py
+  tool_preference: python
+  output_root: app-store-captures/raw
+  proof_devices:
+    - iphone
+  proof_screens:
+    - home
+    - primary-feature
+  stabilize_status_bar: true
+
+final_export:
+  strategy: preview-web-server
+  recommended_tool: app-store-screenshots
+  preview_root: app-store-preview/final
+  confirm_before_batch: true
+  research_current_store_specs: true
+  size_strategy: widest-current-coverage
+  target_families:
+    - iphone
+    - ipad
+  require_opaque_output: true
+  flatten_alpha: true
+  output_root: app-store-export
+
+validation:
+  script_path: scripts/validate_exported_images.py
+  require_opaque_output: true
+  allowed_sizes:
+    - 1320x2868
+    - 1284x2778
+  notes: >-
+    Keep export validation as a project-owned command so future screenshot
+    refreshes can verify dimensions and alpha rules without rebuilding the
+    process from scratch.
+
+cleanup:
+  preserve_raw_captures: true
+  remove_validation_previews: true
+  remove_temp_archives: true
+
