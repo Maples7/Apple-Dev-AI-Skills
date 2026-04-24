@@ -10,6 +10,7 @@ The canonical source of truth remains under `skills/`.
 - Claude Code: install the canonical skill folder directly.
 - Other agents: start from a single-file prompt wrapper that mirrors the canonical workflow and adapt it into the target agent's rule or prompt system.
 
-Current wrapper:
+Current wrappers:
 
 - [`generic/translate-xcstrings.prompt.md`](./generic/translate-xcstrings.prompt.md)
+- [`generic/commit-message.prompt.md`](./generic/commit-message.prompt.md)

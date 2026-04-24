@@ -46,6 +46,18 @@ Install only this skill:
 npx skills add Maples7/Apple-Dev-AI-Skills --skill translate-xcstrings
 ```
 
+### `commit-message`
+
+Draft an idiomatic English Conventional Commit message from the current diff and session context, with optional repository profile support for scopes, footers, and monorepo naming.
+
+[Open skill folder](./skills/commit-message)
+
+Install only this skill:
+
+```bash
+npx skills add Maples7/Apple-Dev-AI-Skills --skill commit-message
+```
+
 ## Compatibility
 
 This repository follows the [Agent Skills specification](https://agentskills.io/specification).
