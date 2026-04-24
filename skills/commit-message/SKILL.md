@@ -1,6 +1,6 @@
 ---
 name: commit-message
-description: "Draft a git commit message from current repository changes and session context. Use when writing a Conventional Commit, applying repository or team policy for scopes and footers, generating monorepo-aware commit text, or adding issue trailers without running git commit."
+description: "Draft a git commit message from current repository changes, current conversation, and session context. Use when writing a Conventional Commit, applying repository or team policy for scopes and footers, generating monorepo-aware commit text, or adding issue trailers without running git commit."
 argument-hint: "Scope or policy request, for example: 'staged only', 'all local changes', 'use the repo commit profile', or 'include issue reference if present'."
 compatibility: "Designed for Agent-Skills-compatible clients such as VS Code/Copilot and Windsurf. Cursor requires a rules or prompt wrapper instead of direct SKILL.md installation."
 ---
@@ -12,6 +12,7 @@ Generate a single high-quality git commit message from the current repository ch
 ## Use This Skill When
 
 - the user asks for a commit message for current local changes
+- the user wants the commit message to reflect the current conversation, not only the diff
 - staged changes should take priority over unstaged work
 - a Conventional Commit subject, body, or footer is needed
 - the repository expects commit scopes, constrained commit types, or specific footers
