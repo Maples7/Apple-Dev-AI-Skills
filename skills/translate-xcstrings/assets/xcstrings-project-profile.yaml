@@ -1,0 +1,43 @@
+# Copy this file into a consuming project as one of:
+# - xcstrings-project-profile.yaml
+# - .ai/xcstrings-project-profile.yaml
+# - .github/xcstrings-project-profile.yaml
+
+catalogs:
+  explicit_paths: []
+  include_names:
+    - Localizable.xcstrings
+    - InfoPlist.xcstrings
+    - AppShortcuts.xcstrings
+
+default_target_locales: []
+
+brand_tokens:
+  preserve_verbatim: []
+  cjk_spacing_tokens: []
+
+english_only_keys: []
+
+glossary: {}
+
+locale_rules:
+  zh-Hans:
+    punctuation: full-width-near-cjk
+  zh-Hant:
+    punctuation: full-width-near-cjk
+
+# Example shape for glossary:
+# glossary:
+#   Transaction:
+#     ja: 取引
+#     zh-Hans: 交易
+#     zh-Hant: 交易
+#   Account:
+#     ja: 口座
+#     zh-Hans: 账户
+#     zh-Hant: 帳戶
+
+# Example shape for English-only keys:
+# english_only_keys:
+#   - Created by Example with ❤️
+#   - "%1$@ © %2$@ All Rights Reserved."

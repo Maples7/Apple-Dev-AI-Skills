@@ -1,0 +1,7 @@
+# Maintainer-only local AI notes and experiments.
+# Keep shared templates, workflows, and issue config tracked elsewhere in .github/.
+
+/local/
+/private/
+/*.local.md
+/*.private.md
