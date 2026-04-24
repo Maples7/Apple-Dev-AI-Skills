@@ -1,5 +1,7 @@
 # Apple Dev AI Skills
 
+[English](./README.md) | [简体中文](./README.zh-CN.md)
+
 Installable AI skills for Apple-platform work.
 
 Use this repo when you want sharper help for Xcode string catalogs, App Store screenshots, App Store metadata, and git commit messages without re-explaining the workflow every time.

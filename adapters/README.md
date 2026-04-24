@@ -1,5 +1,7 @@
 # Adapters
 
+[English](./README.md) | [简体中文](./README.zh-CN.md)
+
 This directory holds lightweight wrappers for agents that do not natively discover `SKILL.md` folders.
 
 The canonical source of truth remains under `skills/`.
