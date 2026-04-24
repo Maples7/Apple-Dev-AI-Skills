@@ -9,11 +9,12 @@ Translate or normalize Xcode `.xcstrings` catalogs, including `Localizable.xcstr
 ## Operating Rules
 
 1. Before translating, look for a project profile at `xcstrings-project-profile.yaml`, `.ai/xcstrings-project-profile.yaml`, or `.github/xcstrings-project-profile.yaml`.
-2. If no project profile exists, discover the `.xcstrings` files and current locales directly from the repository before making assumptions.
-3. Preserve placeholders, Markdown, literal tokens, and Xcode JSON formatting.
-4. Treat `AppShortcuts.xcstrings` as `stringSet` phrase arrays, not normal single strings.
-5. Keep terminology consistent within each locale and across all catalogs touched in the same pass.
-6. Split large runs into small batches and write each batch back before starting the next one.
+2. On the first substantial use in a new project, explicitly tell the user to create a project profile and fill at least `default_target_locales`, `english_only_keys`, `brand_tokens`, and `glossary`.
+3. If no project profile exists yet, discover the `.xcstrings` files and current locales directly from the repository before making assumptions, and treat those inferences as a temporary bootstrap only.
+4. Preserve placeholders, Markdown, literal tokens, and Xcode JSON formatting.
+5. Treat `AppShortcuts.xcstrings` as `stringSet` phrase arrays, not normal single strings.
+6. Keep terminology consistent within each locale and across all catalogs touched in the same pass.
+7. Split large runs into small batches and write each batch back before starting the next one.
 
 ## Required Checks
 

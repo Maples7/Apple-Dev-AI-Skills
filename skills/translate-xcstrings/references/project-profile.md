@@ -4,6 +4,21 @@ This skill is reusable only if project-specific localization policy is injected 
 
 Use a small YAML profile file to describe local policy. A starter template is available at [assets/xcstrings-project-profile.yaml](./assets/xcstrings-project-profile.yaml).
 
+## First-Run Expectation
+
+For a new project, the first serious translation pass should usually establish this file rather than depending on one-off prompts or repository-specific instructions.
+
+If the project already has shipped locales, protected brand wording, English-only strings, or stable domain terminology, explicitly prompt for a profile and capture those decisions there.
+
+The minimum high-value fields to fill are:
+
+- `default_target_locales`
+- `english_only_keys`
+- `brand_tokens`
+- `glossary`
+
+Without those fields, the skill can still operate conservatively, but it cannot promise project-specific defaults will stay stable across future runs or across different agent clients.
+
 ## Recommended File Names
 
 The skill should look for the first matching file in this order:
@@ -47,4 +62,5 @@ If no profile exists:
 - infer locales from existing `localizations` data
 - preserve any visible established brand tokens literally
 - avoid inventing app-specific English-only policies
-- recommend adding a profile if the project has recurring terminology or non-obvious translation policy
+- explicitly recommend adding a profile if the project has recurring terminology or non-obvious translation policy
+- treat that fallback as a temporary bootstrap state, not the ideal steady state for repeated use

@@ -24,6 +24,21 @@ Translate or normalize Apple string catalogs backed by Xcode `.xcstrings` files.
 3. If no profile exists, discover catalogs and existing locales directly from the `.xcstrings` files before making assumptions.
 4. Keep edits surgical so Xcode-generated formatting stays reviewable.
 
+## First-Run Requirement
+
+On the first substantial use in a new project, do not silently rely on inferred policy if the project clearly has shipped-locales or terminology decisions that should persist.
+
+Instead, explicitly tell the user that the project should add a project profile and point them to [assets/xcstrings-project-profile.yaml](./assets/xcstrings-project-profile.yaml).
+
+At minimum, ask the user to confirm or fill these fields:
+
+- `default_target_locales` for the shipped locale set
+- `english_only_keys` for strings that must remain identical to English in every locale
+- `brand_tokens` for literal product or marketing tokens and any CJK spacing rules around them
+- `glossary` for recurring domain terms that must stay consistent across catalogs
+
+If the user wants the change completed in the same pass, create the profile first or alongside the translation change instead of leaving those rules trapped in prompts, instructions, or agent memory.
+
 ## Project Profile
 
 Look for a project profile in one of these places before translating:
@@ -33,7 +48,9 @@ Look for a project profile in one of these places before translating:
 - `.github/xcstrings-project-profile.yaml`
 - another path explicitly provided by the user
 
-If none exists, use the conservative defaults in [project profile reference](./references/project-profile.md) and recommend adding a project profile after the change.
+If none exists, use the conservative defaults in [project profile reference](./references/project-profile.md) only as a temporary fallback.
+
+When the project has any non-trivial shipped locale set, English-only strings, protected brand tokens, or recurring domain terminology, explicitly tell the user that a project profile should be created before this workflow becomes routine.
 
 Use [assets/xcstrings-project-profile.yaml](./assets/xcstrings-project-profile.yaml) as the template when a project needs one.
 
