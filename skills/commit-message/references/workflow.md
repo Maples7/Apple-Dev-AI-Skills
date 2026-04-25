@@ -48,4 +48,6 @@ When a reference exists:
 
 - Return the drafted message only; do not create a commit.
 - If the diff is unusually broad or mixes unrelated concerns, add a short note suggesting a split after the message.
+- If diff inspection reveals a high-confidence commit-relevant issue, such as accidental secrets, unrelated changes, temporary or debug artifacts, generated files, or an obvious need to split the commit, add one short note after the message.
+- Do not perform a full code review or include speculative improvement suggestions.
 - If no profile exists and the user asked for repository-specific rules, note that conservative fallback rules were used.

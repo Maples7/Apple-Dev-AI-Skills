@@ -26,7 +26,7 @@ Generate a single high-quality git commit message from the current repository ch
 2. Prefer staged changes whenever staged content exists.
 3. Use the actual diff plus session context so the message explains why the change happened, not only what changed.
 4. Detect likely issue references from the current branch name and recent conversation.
-5. Produce a message only; do not run `git commit`.
+5. Produce a commit message plus only the allowed short caveats; do not run `git commit`.
 
 ## Commit Profile
 
@@ -54,4 +54,5 @@ Use [assets/commit-message-profile.yaml](./assets/commit-message-profile.yaml) a
 - the message satisfies the effective repository profile or conservative fallback rules
 - staged versus unstaged scope is handled correctly
 - required scope and footer conventions are applied when the evidence supports them
+- any note after the message is high-confidence, commit-relevant, and non-speculative
 - the output is ready for the user to copy into `git commit`
