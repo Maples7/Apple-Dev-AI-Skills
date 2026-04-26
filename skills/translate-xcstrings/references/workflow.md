@@ -20,10 +20,12 @@ If a project profile exists, read it before translating.
 Project policy should override generic defaults for:
 
 - shipped-language set
+- supported platforms
 - brand token handling
 - English-only keys
 - preferred glossary terms
 - locale-specific style rules
+- variation policy for plural and device variants
 
 If no profile exists, infer only what is visible in the catalog files and keep assumptions conservative.
 
@@ -49,6 +51,8 @@ For each in-scope key:
 - list which locales are missing
 - identify stale or inconsistent translations
 - note whether the value is a `stringUnit`, `variations`, or `stringSet`
+- identify `stringUnit` candidates whose wording may need count-specific plural variants
+- identify `stringUnit` candidates whose action wording may need platform-specific device variants after checking the project's supported platforms
 
 Do not start writing translations until the missing-work surface is clear.
 
@@ -72,6 +76,8 @@ Apply the correct structure per key type:
 - `stringSet` for `AppShortcuts.xcstrings` phrase arrays
 
 Do not flatten one structure into another.
+
+Do not silently convert a `stringUnit` into `variations`. If a key appears to need new plural or device variants and the user did not explicitly request that structure change, report the candidate and ask whether to add the variants first.
 
 ## 7. Write Edits Surgically
 

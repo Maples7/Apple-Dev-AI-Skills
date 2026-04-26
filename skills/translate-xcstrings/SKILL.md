@@ -33,9 +33,11 @@ Instead, explicitly tell the user that the project should add a project profile 
 At minimum, ask the user to confirm or fill these fields:
 
 - `default_target_locales` for the shipped locale set
+- `supported_platforms` for device variation decisions and platform-specific wording
 - `english_only_keys` for strings that must remain identical to English in every locale
 - `brand_tokens` for literal product or marketing tokens and any CJK spacing rules around them
 - `glossary` for recurring domain terms that must stay consistent across catalogs
+- `variation_policy` for project-specific rules about adding plural or device variations
 
 If the user wants the change completed in the same pass, create the profile first or alongside the translation change instead of leaving those rules trapped in prompts, instructions, or agent memory.
 

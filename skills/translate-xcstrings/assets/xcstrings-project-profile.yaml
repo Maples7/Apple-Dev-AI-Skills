@@ -12,6 +12,27 @@ catalogs:
 
 default_target_locales: []
 
+# Apple platforms this app ships on, used when deciding whether interaction
+# wording may need device variations instead of one shared string.
+# Example: [iOS, iPadOS, macOS, watchOS, visionOS]
+supported_platforms: []
+
+# Ask before changing a plain stringUnit into plural or device variations.
+variation_policy:
+  ask_before_adding_plural_variations: true
+  ask_before_adding_device_variations: true
+  platform_action_terms:
+    macOS:
+      primary_pointer_action: click
+    iOS:
+      primary_touch_action: tap
+    iPadOS:
+      primary_touch_action: tap
+    watchOS:
+      primary_touch_action: tap
+    visionOS:
+      primary_direct_action: tap
+
 brand_tokens:
   preserve_verbatim: []
   cjk_spacing_tokens: []
