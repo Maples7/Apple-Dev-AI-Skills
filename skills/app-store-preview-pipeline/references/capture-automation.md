@@ -32,11 +32,32 @@ Use the most stable navigation layer the project can support:
 
 Do not start with raw coordinates if the project can expose stable identifiers instead.
 
+## Native Apple `simctl` Launch Pattern
+
+For native Apple screenshot capture scripts, prefer launching the already-installed app with `xcrun simctl launch` so the same command can pass screenshot sample data, route, and locale inputs.
+
+`simctl launch` passes every argument after the bundle identifier to the app; it does not need an `--args` separator.
+
+```sh
+xcrun simctl boot "$SIMULATOR_UDID"
+xcrun simctl bootstatus "$SIMULATOR_UDID" -b
+xcrun simctl launch --terminate-running-process "$SIMULATOR_UDID" "$BUNDLE_ID" \
+	-UseScreenshotSampleData \
+	-ScreenshotSeed "$SEED" \
+	-ScreenshotRoute "$ROUTE" \
+	-AppleLanguages "($LANGUAGE_CODE)" \
+	-AppleLocale "$APPLE_LOCALE"
+xcrun simctl io "$SIMULATOR_UDID" screenshot "$OUTPUT_PATH"
+```
+
+Keep the flag names project-owned. The example uses the defaults from the SwiftUI/Xcode screenshot config template, but app-specific scripts should adapt them to the app's existing launch arguments or environment variables.
+
 ## Preflight Checks
 
 Before capturing anything, verify:
 
 - the simulator runtime and requested device are available
+- `xcrun --find simctl` succeeds; if it does not, tell the user to install Xcode or the Xcode Command Line Tools, for example with `xcode-select --install`, then select the intended Xcode developer directory if needed
 - the app is installed on the target simulator
 - the sample-data mode exists and is reachable
 - any required command-line tools are installed
