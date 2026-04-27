@@ -50,4 +50,5 @@
 
 - Return the commit message in a single fenced code block with no language tag.
 - If needed, add one short caveat line after the block, such as a suggestion to split unrelated changes or a note that conservative fallback rules were used.
+- When strong split signals are present, append a `Suggested split plan` section after the primary message as defined in [workflow](./workflow.md#split-plan-suggestion). The primary message above the plan must remain a single valid Conventional Commit message that covers the full current diff, so the user can still use it as-is without splitting.
 - Do not include extra commentary before the message.

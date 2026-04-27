@@ -45,14 +45,16 @@ Use [assets/commit-message-profile.yaml](./assets/commit-message-profile.yaml) a
 
 1. Follow the inspection order in [workflow](./references/workflow.md).
 2. Apply the drafting rules in [message rules](./references/message-rules.md).
-3. If the diff covers unrelated concerns, still produce the best single message you can and note that the change may deserve a split.
+3. If the diff covers unrelated concerns, still produce the best single message you can. When strong split signals are present, also append a suggested split plan as described in [workflow](./references/workflow.md#split-plan-suggestion).
+4. Never run `git add`, `git commit`, or otherwise modify the index or working tree. Splitting and validation are the user's decision.
 
 ## Exit Criteria
 
-- exactly one Conventional Commit message is produced
+- exactly one primary Conventional Commit message is produced for the current diff
 - the message is written in idiomatic English
 - the message satisfies the effective repository profile or conservative fallback rules
 - staged versus unstaged scope is handled correctly
 - required scope and footer conventions are applied when the evidence supports them
 - any note after the message is high-confidence, commit-relevant, and non-speculative
+- when split signals are strong, an additional `Suggested split plan` section is appended; it is a proposal only and no `git` commands are executed
 - the output is ready for the user to copy into `git commit`

@@ -51,3 +51,27 @@ When a reference exists:
 - If diff inspection reveals a high-confidence commit-relevant issue, such as accidental secrets, unrelated changes, temporary or debug artifacts, generated files, or an obvious need to split the commit, add one short note after the message.
 - Do not perform a full code review or include speculative improvement suggestions.
 - If no profile exists and the user asked for repository-specific rules, note that conservative fallback rules were used.
+
+## Split Plan Suggestion
+
+The default output is always a single best commit message. Only when the diff shows strong, unambiguous split signals, append an additional split plan after that message.
+
+Qualifying signals (any one is enough):
+
+- the change cleanly spans more than one Conventional Commit type that are not causally related, for example a `feat` mixed with an unrelated `chore`, `refactor`, `docs`, or dependency bump
+- multiple independent scopes or packages change with no dependency between them
+- a functional change is mixed with obviously separable noise such as bulk formatting, renames, or generated-file updates
+
+Do not suggest a split when:
+
+- the changes share a single purpose even if they touch several files or types
+- splitting would require breaking a hunk in a way that could leave intermediate commits non-buildable in a non-obvious way
+- evidence is weak or speculative
+
+When you do suggest a split, output a section titled `Suggested split plan` after the primary commit message with:
+
+1. an ordered list of proposed commits in the order they should be applied
+2. for each proposed commit: a one-line scope description (files, directories, or hunks it covers) and a draft Conventional Commit message in a fenced code block
+3. a closing line stating that this is a proposal only, that no `git` commands have been or will be run, and that the user is responsible for performing the split and verifying no regressions afterward
+
+Never execute `git add`, `git add -p`, `git commit`, `git reset`, `git stash`, or any test or build command as part of this skill. Validation of the split belongs to the project's own test, build, or CI workflow, not to this skill.
