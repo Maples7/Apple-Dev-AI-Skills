@@ -1,10 +1,25 @@
 {
   "version": 1,
   "skills": {
+    "app-store-preview-pipeline": {
+      "source": "Maples7/Apple-Dev-AI-Skills",
+      "sourceType": "github",
+      "computedHash": "96ce19cc81f55fba4f9b60925ddd6845c2f0cdd60da117f0a5d0960cb4ac7f94"
+    },
     "commit-message": {
       "source": "Maples7/Apple-Dev-AI-Skills",
       "sourceType": "github",
-      "computedHash": "0faa2999423fa8fab5973f2a7942495d3e352c97bc51006b8f1e40ff882adf9d"
+      "computedHash": "7884febad704eb18813ad74fa10e6e09f6e0a9805d0512b4f13c888ebbc64c1a"
+    },
+    "eas-app-store-metadata": {
+      "source": "Maples7/Apple-Dev-AI-Skills",
+      "sourceType": "github",
+      "computedHash": "a35af8765a353a15c7aabf6cba8597f1702948018b19c2b29ce9e8c5d647902c"
+    },
+    "translate-xcstrings": {
+      "source": "Maples7/Apple-Dev-AI-Skills",
+      "sourceType": "github",
+      "computedHash": "8e84b2aebe6cfe65c707921f0521917d2f111636c82a44790681f6c96b37ebfa"
     }
   }
 }
