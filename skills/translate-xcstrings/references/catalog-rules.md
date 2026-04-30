@@ -37,6 +37,23 @@ Preserve placeholders verbatim:
 
 Do not translate, quote, or drop them. Only switch to positional placeholders when word order genuinely requires it.
 
+## No-Op Translation Rule
+
+Some keys contain only placeholders, punctuation, symbols, or other non-translatable tokens. Examples:
+
+- `%@`
+- `%@ (%@)`
+- `%@%@`
+- `+%@`
+- `-%@`
+- `"%@"`
+- `.`
+- `-`
+
+Do not skip these keys. Write the source string verbatim into every target locale so the catalog state moves from `NEW` to translated. Skipping them leaves persistent `NEW` rows in Xcode, drags down the per-locale completion percentage, and can stall release / screenshot pipelines that gate on full translation.
+
+A key qualifies for no-op translation when, after stripping placeholders and Markdown / formatting tokens, no human-readable text remains. If any natural-language fragment is present (even a single word like `at` in `%@ at %@`), translate normally instead.
+
 ## Markdown and Formatting Rules
 
 Preserve these verbatim:
