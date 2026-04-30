@@ -1,0 +1,41 @@
+# Describe the screens and proof-first rollout for one app's screenshot pipeline.
+
+proof:
+  locale: en-US
+  devices:
+    - iphone
+  screens:
+    - home
+    - primary-feature
+
+batch:
+  locales:
+    - en-US
+    - de-DE
+  devices:
+    - iphone
+    - ipad
+
+screens:
+  - id: home
+    goal: Show the app's primary value in a stable default state.
+    appearances:
+      - light
+    filename: home.png
+    navigation:
+      strategy: accessibility
+      entry: launch
+      steps:
+        - Wait until the home screen is visible.
+
+  - id: primary-feature
+    goal: Show the feature the user wants to sell in the store listing.
+    appearances:
+      - light
+    filename: primary-feature.png
+    navigation:
+      strategy: accessibility
+      entry: home
+      steps:
+        - Navigate from the home screen to the primary feature screen.
+        - Wait until the screen settles before capture.
