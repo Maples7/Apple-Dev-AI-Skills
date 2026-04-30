@@ -78,6 +78,20 @@ Install only this skill:
 npx skills add Maples7/Apple-Dev-AI-Skills --skill eas-app-store-metadata
 ```
 
+### `pre-commit-review`
+
+Review uncommitted Apple-platform changes through seven lenses — performance, user experience, test coverage, architecture, code style, security & privacy, and documentation — and return a structured, severity-graded report before you run `git commit`.
+
+Why it stands out: most pre-commit checks are either a linter or a free-form review. This skill gives Swift / SwiftUI work a focused, repeatable triage that calls out perf risk, UX regressions, missing tests, layering and style drift, surface-level security or privacy issues, and stale docs in one pass.
+
+[Open skill folder](./skills/pre-commit-review)
+
+Install only this skill:
+
+```bash
+npx skills add Maples7/Apple-Dev-AI-Skills --skill pre-commit-review
+```
+
 ### `commit-message`
 
 Draft a strong English Conventional Commit message from your current diff and session context, with support for scopes, footers, and monorepo conventions.

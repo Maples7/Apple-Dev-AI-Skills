@@ -78,6 +78,20 @@ npx skills add Maples7/Apple-Dev-AI-Skills --skill app-store-preview-pipeline
 npx skills add Maples7/Apple-Dev-AI-Skills --skill eas-app-store-metadata
 ```
 
+### `pre-commit-review`
+
+在执行 `git commit` 之前，从性能、用户体验、测试覆盖、架构、代码风格、安全与隐私、以及文档七个维度审查未提交的 Apple 平台改动，并输出按严重度分级的结构化报告。
+
+它的价值在于：常见的提交前检查要么是 linter，要么是自由形式的代码评审。这个技能给 Swift / SwiftUI 改动提供了一次聚焦、可复用的分级审查，能在同一遍中点出性能风险、UX 回归、测试缺口、分层与风格漂移、表层安全与隐私问题、以及遗漏的文档更新。
+
+[打开技能目录](./skills/pre-commit-review)
+
+只安装这个技能：
+
+```bash
+npx skills add Maples7/Apple-Dev-AI-Skills --skill pre-commit-review
+```
+
 ### `commit-message`
 
 结合当前 diff 和会话上下文，起草高质量的英文 Conventional Commit 提交信息，并支持 scope、footer 以及 monorepo 约定。
