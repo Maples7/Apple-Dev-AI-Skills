@@ -62,3 +62,4 @@ Always produce the report in this exact structure. Keep it short, actionable, an
 - When the diff is too broad to review in one pass, set `Recommendation: hold` and ask the user to split the commit before scoring further.
 - Do not include code blocks of replacement code. Suggestions are described in prose.
 - Do not invoke `git commit` or any mutating command at any point.
+- Write prose (finding descriptions, `Why:` / `Fix:` sentences, `Notes`) in the user's current session language. Keep these anchors in English verbatim: section headings, field labels (`Scope:`, `Files reviewed:`, `Recommendation:`, `Why:`, `Fix:`, `Suggested test:`), severity tokens (`blocker` / `major` / `minor` / `info`), and recommendation tokens (`proceed` / `proceed-with-followups` / `hold`).

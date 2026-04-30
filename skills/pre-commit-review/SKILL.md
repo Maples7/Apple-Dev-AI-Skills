@@ -53,6 +53,7 @@ This skill does not edit code, run tests, or invoke `git commit`. It analyzes th
 - For new `public` / `open` API or build/run instruction changes, always run the docs lens (docs reference).
 - Never run `git commit`, `git push`, or any mutating command. This skill only reads.
 - Never edit source files. Recommendations go in the report only.
+- Write the report's prose (finding descriptions, `Why:` and `Fix:` sentences, `Notes`) in the user's current session language. Keep structural anchors in English so the report stays machine- and human-parseable: section headings (`## Pre-Commit Review`, `### Performance`, etc.), field labels (`Scope:`, `Files reviewed:`, `Recommendation:`, `Why:`, `Fix:`, `Suggested test:`), severity tokens (`blocker`, `major`, `minor`, `info`), and recommendation tokens (`proceed`, `proceed-with-followups`, `hold`).
 
 ## Out Of Scope
 
