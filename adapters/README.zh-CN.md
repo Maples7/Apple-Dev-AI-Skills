@@ -15,6 +15,7 @@
 当前提供的包装器：
 
 - [generic/translate-xcstrings.prompt.md](./generic/translate-xcstrings.prompt.md)
-- [generic/commit-message.prompt.md](./generic/commit-message.prompt.md)
 - [generic/app-store-preview-pipeline.prompt.md](./generic/app-store-preview-pipeline.prompt.md)
 - [generic/eas-app-store-metadata.prompt.md](./generic/eas-app-store-metadata.prompt.md)
+- [generic/pre-commit-review.prompt.md](./generic/pre-commit-review.prompt.md)
+- [generic/commit-message.prompt.md](./generic/commit-message.prompt.md)
