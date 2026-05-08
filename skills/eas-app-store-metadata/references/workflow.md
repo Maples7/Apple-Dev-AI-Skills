@@ -74,6 +74,9 @@ Use [validation-rules.md](./validation-rules.md) for the required checks.
 - Push only after lint and diff review are both clean enough for the requested change.
 - If the release requires a new App Store Connect draft version, confirm that the draft exists first.
 - Treat partial success as a state that must be reviewed and retried intentionally, not ignored.
+- Do not gate "did push succeed" on the EAS CLI exit code alone for `metadata:push`. Capture stdout and stderr to a log and require the absence of these markers before declaring the push clean: `Failed uploading screenshot`, `Failed deleting screenshot`, `Failed reordering screenshots`, `Failed creating screenshot set`, `Unexpected response`, `Store configuration upload encountered an error`.
+- For long pushes (many locales × devices), wrap the call in a stdout-aware retry loop. Use [../assets/eas-metadata-push-retry.sh](../assets/eas-metadata-push-retry.sh) as a reference template. The push step is idempotent; completed assets match by filename + filesize and are skipped on the next attempt.
+- After the final clean pass, verify App Store Connect screenshot order with `eas metadata:pull --profile <profile>` and a local diff. EAS CLI calls `screenshotSet.reorderScreenshotsAsync` only at the end of each `(locale × screenshotDisplayType)` pair, so a previous run that aborted on a transient delete or upload error can leave that pair scrambled until a fully clean run reaches the reorder step.
 
 ## 9. Handoff The Release Boundary Explicitly
 

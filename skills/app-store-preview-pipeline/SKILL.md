@@ -52,11 +52,12 @@ Use [assets/app-store-preview-pipeline-profile.yaml](./assets/app-store-preview-
 3. Use [capture automation](./references/capture-automation.md) to design app-specific scripts for proof captures.
 4. Use [project layout](./references/project-layout.md) to keep source captures, preview sources, reviews, and exports separate.
 5. Use [final export](./references/final-export.md) to stage preview review, optional web preview tooling, current size coverage checks, and final batch generation.
-6. Use [assets/validate-exported-images.py](./assets/validate-exported-images.py) as a template for a project-owned pre-delivery validation command.
-7. Use [cleanup](./references/cleanup.md) to remove disposable intermediate artifacts after delivery.
-8. Use [public examples](./references/public-examples.md) only as outcome references, never as implementation dependencies.
-9. Use [cleanup](./references/cleanup.md) to decide which reproducible-but-local artifacts belong in the project's `.gitignore`, and ask the user before editing ignore rules when the right boundary is unclear.
-10. If the pipeline is being introduced for the first time in a project, finish with the maintenance handoff described in [workflow](./references/workflow.md), including the question about writing the rerun process into the project's README or developer docs.
+6. Use [batch pipeline](./references/batch-pipeline.md) for concrete tool selection (`xcrun simctl` / `idb` / Playwright), parallel device runners, and validation patterns once the project is past the proof stage. The reference scripts at [assets/capture-screenshots.py](./assets/capture-screenshots.py), [assets/compose-screenshots.mjs](./assets/compose-screenshots.mjs), and [assets/sync-store-config-screenshots.py](./assets/sync-store-config-screenshots.py) are starting templates the project should copy in and adapt rather than reinvent.
+7. Use [assets/validate-exported-images.py](./assets/validate-exported-images.py) as a template for a project-owned pre-delivery validation command.
+8. Use [cleanup](./references/cleanup.md) to remove disposable intermediate artifacts after delivery.
+9. Use [public examples](./references/public-examples.md) only as outcome references, never as implementation dependencies.
+10. Use [cleanup](./references/cleanup.md) to decide which reproducible-but-local artifacts belong in the project's `.gitignore`, and ask the user before editing ignore rules when the right boundary is unclear.
+11. If the pipeline is being introduced for the first time in a project, finish with the maintenance handoff described in [workflow](./references/workflow.md), including the question about writing the rerun process into the project's README or developer docs.
 
 ## Exit Criteria
 

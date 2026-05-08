@@ -61,7 +61,7 @@ Use [assets/capture-manifest.yaml](../assets/capture-manifest.yaml) as the start
 - Keep proof mode small: one locale, one or two devices, and only the highest-value screens.
 - Avoid generating the full locale and device matrix before the user approves the proof set.
 
-Use [capture-automation.md](./capture-automation.md) for the script design rules.
+Use [capture-automation.md](./capture-automation.md) for the script design rules. Once the proof script needs to grow into a full batch driver, use [batch-pipeline.md](./batch-pipeline.md) for concrete tool selection and the reference scripts at `../assets/capture-screenshots.py`, `../assets/compose-screenshots.mjs`, and `../assets/sync-store-config-screenshots.py` as starting templates.
 
 ## 5. Review The Proof Set
 
@@ -86,6 +86,7 @@ Use [final-export.md](./final-export.md) for the export rules.
 - Confirm whether the final export path should be committed or added to `.gitignore`.
 - Confirm write permissions and whether existing outputs may be overwritten.
 - Only after proof approval and destination confirmation should the automation generate the full matrix of locales, devices, and approved screens.
+- For batch runs, follow the tool-layer cheatsheet, parallel device runner pattern, stabilization checklist, and post-run validation in [batch-pipeline.md](./batch-pipeline.md). Re-running the project's filesystem-to-config sync (`../assets/sync-store-config-screenshots.py` or the project's own variant) keeps the upstream metadata source of truth aligned with the freshly captured tree before any upload step.
 
 ## 8. Clean Up Disposable Artifacts
 

@@ -76,7 +76,7 @@ If no profile exists, use the conservative defaults in [project profile referenc
 1. Follow the end-to-end sequence in [workflow](./references/workflow.md).
 2. Load or establish project rules using [project profile reference](./references/project-profile.md).
 3. Apply push-safety and App Store field checks from [validation rules](./references/validation-rules.md).
-4. Use [troubleshooting](./references/troubleshooting.md) when EAS linkage, authentication, ASC draft state, or partial uploads fail.
+4. Use [troubleshooting](./references/troubleshooting.md) when EAS linkage, authentication, ASC draft state, partial uploads, screenshot order drift, or transient App Store Connect API failures bite. The same reference covers the wrapper pattern at [assets/eas-metadata-push-retry.sh](./assets/eas-metadata-push-retry.sh) for stdout-aware retry on long pushes.
 
 ## Exit Criteria
 
