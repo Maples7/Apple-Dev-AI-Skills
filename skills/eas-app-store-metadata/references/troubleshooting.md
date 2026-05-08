@@ -103,7 +103,7 @@ Common symptoms:
 
 What to do:
 
-- pull first with `eas metadata:pull`
+- pull first with `eas metadata:pull --non-interactive` (always pass `--non-interactive`; the command otherwise blocks on the "overwrite existing store.config.json?" prompt and looks like a hang)
 - review the diff
 - only then make new local edits and push again
 
@@ -150,23 +150,28 @@ Common symptoms:
 - after a push that eventually exits 0, the screenshot order shown in App Store Connect does not match the array order in `store.config.json`
 - some locales or device families are correct, others are scrambled
 - earlier runs in the same release cycle had transient `Failed (uploading|deleting) screenshot` lines
+- the next `eas metadata:push` run prints **no** screenshot-phase output at all (no `Updating screenshots`, no `Uploaded`, no `Reorder`) yet a subsequent `eas metadata:pull` still shows the wrong order
 
 Why this happens:
 
 - For each `(locale × screenshotDisplayType)` pair, EAS CLI runs in this order: diff existing vs config, delete obsolete, upload missing, then call `screenshotSet.reorderScreenshotsAsync` to align the App Store Connect order with the config array order.
 - The reorder step is the **last** step in the pair's loop. If any earlier delete or upload throws, the pair aborts before it reaches reorder, leaving App Store Connect in whatever order assets happened to land in chronologically.
-- A subsequent retry that finds all assets already matching by filename + filesize will still call reorder for that pair — but only if the entire pair completes without errors that run.
-- After many retries with overlapping partial failures, some pairs may never have completed a clean pass that hit reorder.
+- After many retries with overlapping partial failures, some pairs may never have completed a clean pass that reached reorder.
+- **EAS CLI ≥18 short-circuits the screenshot phase entirely when the diff finds nothing to upload or delete**: every asset already matches by filename + filesize. A subsequent "clean" `eas metadata:push` will then exit 0 without ever fetching the live App Store Connect set order, without ever computing whether reorder is needed, and without ever calling `reorderScreenshotsAsync`. Repeated clean pushes after that point cannot converge the order — they have nothing to do.
+- Confirm this case empirically: a push log that contains `Updating localized info`, `Updating age rating`, and `Updating store review details` but **zero** `Updating screenshots ...` / `Uploaded screenshot ...` / `Deleted screenshot ...` lines means the screenshot phase was skipped end-to-end on that run.
 
 What to do (in order):
 
-1. Re-run `eas metadata:push --profile <profile>` once until it completes with **no** failure markers in stdout (see the previous section). Reorder is idempotent; a clean pass repairs every pair.
-2. Verify by running `eas metadata:pull --profile <profile>` and diffing against the local source of truth. The pull download step preserves App Store Connect's current order, so a clean diff means orders are aligned.
-3. If a specific pair refuses to reorder cleanly through EAS CLI, write a small App Store Connect API helper that uses the same `.p8`:
-   - `GET /v1/appStoreVersionLocalizations/{id}/appScreenshotSets`
-   - `GET /v1/appScreenshotSets/{setId}?include=appScreenshots` to inspect the live order
-   - `PATCH /v1/appScreenshotSets/{setId}/relationships/appScreenshots` with the desired ID array to force the order
-4. As a last resort, delete the affected screenshot set entirely (App Store Connect web UI or API), then re-push. Fresh uploads land in config order naturally and the reorder step still fires as a safety net.
+1. Re-run `eas metadata:push --profile <profile>` once until it completes with **no** failure markers in stdout (see the previous section). Reorder is idempotent on pairs that still have upload/delete work to do.
+2. Verify by running `eas metadata:pull --profile <profile> --non-interactive` and diffing against the local source of truth. The pull download step preserves App Store Connect's current order, so a clean diff means orders are aligned. (Always pass `--non-interactive` — `eas metadata:pull` otherwise blocks on the "overwrite existing store.config.json?" prompt and looks like a hang.)
+3. If drift remains and the most recent `eas metadata:push` log has no screenshot-phase output, do not retry the push. Repeating a clean push will not call reorder. Use the App Store Connect API directly with the same `.p8` to PATCH the affected screenshot sets:
+   - `GET /v1/apps/{id}/appStoreVersions?filter[platform]=IOS&filter[appStoreState]=PREPARE_FOR_SUBMISSION,…` to find the editable version
+   - `GET /v1/appStoreVersions/{id}/appStoreVersionLocalizations` to map locale → localization id
+   - `GET /v1/appStoreVersionLocalizations/{id}/appScreenshotSets` to map `screenshotDisplayType` → set id
+   - `GET /v1/appScreenshotSets/{setId}/appScreenshots?fields[appScreenshots]=fileName` to get the current screenshot ids and live order
+   - `PATCH /v1/appScreenshotSets/{setId}/relationships/appScreenshots` with `{"data": [{"type":"appScreenshots","id":"…"}, …]}` in the desired order to force it
+   - Use [assets/asc-fix-screenshot-order.py](../assets/asc-fix-screenshot-order.py) as a ready reference. It reads the same `store.config.json` EAS consumes, supports `--check` (read-only drift report) and `--fix` (apply the PATCH), and reuses the credentials in `eas.json` / env vars.
+4. As a last resort, delete the affected screenshot set entirely (App Store Connect web UI or API), then re-push. Fresh uploads will trigger the reorder step naturally because the diff will no longer be empty.
 
 Do not "fix" order drift by editing the array in `store.config.json`. The local file is the intended order; the dashboard is the side that must converge.
 

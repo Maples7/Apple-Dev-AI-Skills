@@ -76,7 +76,8 @@ Use [validation-rules.md](./validation-rules.md) for the required checks.
 - Treat partial success as a state that must be reviewed and retried intentionally, not ignored.
 - Do not gate "did push succeed" on the EAS CLI exit code alone for `metadata:push`. Capture stdout and stderr to a log and require the absence of these markers before declaring the push clean: `Failed uploading screenshot`, `Failed deleting screenshot`, `Failed reordering screenshots`, `Failed creating screenshot set`, `Unexpected response`, `Store configuration upload encountered an error`.
 - For long pushes (many locales × devices), wrap the call in a stdout-aware retry loop. Use [../assets/eas-metadata-push-retry.sh](../assets/eas-metadata-push-retry.sh) as a reference template. The push step is idempotent; completed assets match by filename + filesize and are skipped on the next attempt.
-- After the final clean pass, verify App Store Connect screenshot order with `eas metadata:pull --profile <profile>` and a local diff. EAS CLI calls `screenshotSet.reorderScreenshotsAsync` only at the end of each `(locale × screenshotDisplayType)` pair, so a previous run that aborted on a transient delete or upload error can leave that pair scrambled until a fully clean run reaches the reorder step.
+- After the final clean pass, verify App Store Connect screenshot order with `eas metadata:pull --profile <profile> --non-interactive` and a local diff. (`--non-interactive` is required: `eas metadata:pull` otherwise blocks on the "overwrite existing store.config.json?" prompt and looks like a hang.) EAS CLI calls `screenshotSet.reorderScreenshotsAsync` only at the end of each `(locale × screenshotDisplayType)` pair, so a previous run that aborted on a transient delete or upload error can leave that pair scrambled.
+- If the diff shows order drift and the most recent push log has no screenshot-phase output (no `Updating screenshots ...`, no `Uploaded screenshot ...`, no `Deleted screenshot ...`), do not retry the push. EAS CLI ≥18 short-circuits the screenshot phase entirely when every asset already matches by filename + filesize, so reorder is never called from a clean retry. Force the order through the App Store Connect API directly using [../assets/asc-fix-screenshot-order.py](../assets/asc-fix-screenshot-order.py) (run with `--check` first, then `--fix`).
 
 ## 9. Handoff The Release Boundary Explicitly
 
@@ -101,7 +102,7 @@ At minimum, hand off these command patterns:
 
 ```bash
 export ASC_API_KEY_PATH="$HOME/Library/Application Support/eas/credentials/<apple-team-id>/AuthKey_<key-id>.p8"
-eas metadata:pull --profile production
+eas metadata:pull --profile production --non-interactive
 ```
 
 - Modify App Store listing information locally, validate it, then push it back:
