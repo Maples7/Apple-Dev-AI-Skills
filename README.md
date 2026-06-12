@@ -106,6 +106,20 @@ Install only this skill:
 npx skills add Maples7/Apple-Dev-AI-Skills --skill commit-message
 ```
 
+### `handle-github-issue`
+
+Process any GitHub issue end-to-end using disciplined code review, TDD when applicable, local verification, and structured landing workflow.
+
+Why it stands out: GitHub issue automation is ad hoc and error-prone. This skill provides a reusable checklist for read → implement → verify → review → land → close, ensuring consistent quality and transparent communication.
+
+[Open skill folder](./skills/handle-github-issue)
+
+Install only this skill:
+
+```bash
+npx skills add Maples7/Apple-Dev-AI-Skills --skill handle-github-issue
+```
+
 ## Compatibility
 
 This repository follows the [Agent Skills specification](https://agentskills.io/specification).

@@ -19,3 +19,4 @@ Current wrappers:
 - [`generic/eas-app-store-metadata.prompt.md`](./generic/eas-app-store-metadata.prompt.md)
 - [`generic/pre-commit-review.prompt.md`](./generic/pre-commit-review.prompt.md)
 - [`generic/commit-message.prompt.md`](./generic/commit-message.prompt.md)
+- [`generic/handle-github-issue.prompt.md`](./generic/handle-github-issue.prompt.md)

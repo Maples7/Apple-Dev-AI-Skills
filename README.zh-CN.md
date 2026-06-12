@@ -106,6 +106,20 @@ npx skills add Maples7/Apple-Dev-AI-Skills --skill pre-commit-review
 npx skills add Maples7/Apple-Dev-AI-Skills --skill commit-message
 ```
 
+### `handle-github-issue`
+
+从头到尾处理 GitHub issue，遵循严谨的代码审查纪律、在适当时运用测试驱动开发（TDD）、本地验证以及结构化的着陆工作流。
+
+它的价值在于：GitHub issue 自动化处理通常很临时，容易出错。这个技能提供可复用的检查清单，确保从读取 → 实现 → 验证 → 审查 → 着陆 → 关闭的全流程质量稳定、沟通透明。
+
+[打开技能目录](./skills/handle-github-issue)
+
+只安装这个技能：
+
+```bash
+npx skills add Maples7/Apple-Dev-AI-Skills --skill handle-github-issue
+```
+
 ## 兼容性
 
 本仓库遵循 [Agent Skills specification](https://agentskills.io/specification)。
